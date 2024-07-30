@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Seller;
 use App\Models\User;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            CustomerSeeder::class
+            CustomerSeeder::class,
+            Seller::class
         ]);
         // User::factory(10)->create();
 
