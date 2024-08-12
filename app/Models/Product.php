@@ -13,11 +13,17 @@ class Product extends Model
     protected $fillable = [
         'name',
         'seller_id',
+        'category_id',
     ];
 
     public function seller(): BelongsTo
     {
         return $this->belongsTo(Seller::class);
+    }
+
+    public function categories(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Seller;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +20,8 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'seller_id' => Seller::query()->inRandomOrder()->value('id')
+            'seller_id' => Seller::query()->inRandomOrder()->value('id'),
+            'category_id' => Category::query()->inRandomOrder()->value('id')
         ];
     }
 }
