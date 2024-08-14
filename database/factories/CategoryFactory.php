@@ -25,7 +25,7 @@ class CategoryFactory extends Factory
             $parent_id = null;
         }
         return [
-            'name' => $this->faker->word,
+            'name' => $this->faker->unique()->word,
             'parent_id' => $parent_id,
             'description' => $this->faker->realText
         ];
