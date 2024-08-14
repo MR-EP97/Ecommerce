@@ -2,11 +2,10 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FeatureController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
-
-
 
 
 Route::post('/customer/register', [CustomerController::class, 'registerCustomer']);
@@ -18,5 +17,7 @@ Route::post('/seller/login', [SellerController::class, 'loginSeller']);
 
 Route::apiResource('/products', ProductController::class);
 Route::apiResource('/categories', CategoryController::class);
+
+Route::apiResource('/features', FeatureController::class);
 
 
