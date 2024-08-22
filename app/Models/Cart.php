@@ -25,4 +25,17 @@ class Cart extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    public function getInvoice()
+    {
+//        TODO invoice handling
+//        $invoice = [];
+//        $invoice['total_amount'] = $this->products()->sum('price');
+//         $invoice['total_number'] = $this->products()->count();
+//         $invoice['id'] = $this->id;
+//        foreach ($this->products as $key => $product) {
+//            $invoice['product'][$key] = $product->name;
+//        }
+//        return $invoice;
+    }
 }
