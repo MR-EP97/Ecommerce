@@ -9,6 +9,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Psy\Util\Json;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
@@ -31,9 +32,16 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request): JsonResponse
     {
+
         $product = Product::query()->create(
-            $request->only('name', 'seller_id')
+            $request->only('name', 'seller_id', 'category_id')
         );
+        if ($request->has('image')) {
+            $path = Storage::disk('local')->put('avatar/products', $request->file('image'));
+            $product->image()->create([
+                'url' => $path
+            ]);
+        }
 
         return Response::json([
             'status' => 'success',

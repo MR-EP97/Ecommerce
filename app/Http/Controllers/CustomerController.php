@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class CustomerController extends Controller
@@ -77,6 +78,13 @@ class CustomerController extends Controller
             'email', 'password', 'first_name', 'last_name', 'phone_number', 'user_name', 'bio', 'profile_picture'
         ));
 
+        if ($request->has('image')) {
+            $path = Storage::disk('local')->put('avatar/customers', $request->file('image'));
+            $customer->image()->create([
+                'url' => $path
+            ]);
+        }
+
         return Response::json([
             'status' => 'success',
             'message' => 'User Registered Successfully',
@@ -104,6 +112,7 @@ class CustomerController extends Controller
         ], HttpResponse::HTTP_OK);
 
     }
+
 
     public function logoutCustomer()
     {

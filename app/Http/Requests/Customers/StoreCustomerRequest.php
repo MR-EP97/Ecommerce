@@ -27,6 +27,7 @@ class StoreCustomerRequest extends FormRequest
             'password' => 'required|confirmed',
             'phone_number' => 'required|unique:App\Models\Customer',
             'user_name' => 'required|unique:App\Models\Customer|min:5',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ];
     }
 }
