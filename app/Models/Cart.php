@@ -32,9 +32,14 @@ class Cart extends Model
 //        $invoice = [];
 //        $invoice['total_amount'] = $this->products()->sum('price');
 //         $invoice['total_number'] = $this->products()->count();
+        // سه مقددار برای تعداد داریم . 1- تعداد محصولات سفارش داده شده بر حسب نوع. 2 -تعداد کل محصولات سافرش داده شده 3- تعداد ر هر نوع
+        // مثال فرض کنیم 1عدد گوشی ،2عدد لیوان ، 3عدد دفتر سفارش داده شده است
+        // 1- 3تا سفارش داریم . 2- 6تا . 3- در هر دیتا تعداد جداگانه ارسال شود مثلا 1 گوشی ، 2لیوان و ...
 //         $invoice['id'] = $this->id;
 //        foreach ($this->products as $key => $product) {
-//            $invoice['product'][$key] = $product->name;
+//            $invoice[$key]['product'] = $product->name;
+//            $invoice[$key]['seller'] = $product->seller->name;
+//            $number = $product->number;
 //        }
 //        return $invoice;
     }
