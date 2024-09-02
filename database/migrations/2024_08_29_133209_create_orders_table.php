@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->json('data')->nullable();
-            $table->enum('status', ['paid', 'preparing', 'shipping', 'delivered']);
+            $table->enum('status', ['paid', 'preparing', 'shipping', 'delivered'])->default('paid');
             $table->foreignId('customer_id')->constrained();
             $table->timestamps();
         });

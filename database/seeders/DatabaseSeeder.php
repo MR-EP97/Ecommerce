@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             CustomerSeeder::class,
             SellerSeeder::class,
             CategorySeeder::class,
-            FeatureFactory::class,
+            FeatureSeeder::class,
             ProductSeeder::class,
         ]);
     }

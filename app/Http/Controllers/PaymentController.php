@@ -3,10 +3,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
+use App\Enums\OrderStatus;
 use App\Models\Order;
+use App\States\OrderState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
@@ -14,11 +16,11 @@ class PaymentController extends Controller
 {
     public function pay(Request $request)
     {
+
         $cart = $request->user()
             ->carts
             ->where('status', 'active')
             ->first();//        $invoice = $cart->getInvoice();
-
 
         try {
             DB::beginTransaction();
@@ -31,12 +33,13 @@ class PaymentController extends Controller
             $cart->update([
                 'status' => 'success',
             ]);
+
             Order::query()->create([
-                'status' => 'paid',
                 'customer_id' => $cart->customer_id,
                 'data' => '{}'
 //                'data' => json_decode($invoice, false, 512, JSON_THROW_ON_ERROR)
             ]);
+
             //update products inventory
 
             DB::commit();
@@ -47,6 +50,9 @@ class PaymentController extends Controller
             ], HttpResponse::HTTP_CREATED);
 //            }
         } catch (\Exception $e) {
+
+            Log::info('failed');
+
             DB::rollBack();
             $cart->update([
                 'status' => 'failed',
