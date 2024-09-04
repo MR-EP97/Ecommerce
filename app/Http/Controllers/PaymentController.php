@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderStatus;
 use App\Models\Order;
+use App\Notifications\UserState;
 use App\States\OrderState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
@@ -34,11 +34,15 @@ class PaymentController extends Controller
                 'status' => 'success',
             ]);
 
-            Order::query()->create([
+            $order = Order::query()->create([
                 'customer_id' => $cart->customer_id,
                 'data' => '{}'
 //                'data' => json_decode($invoice, false, 512, JSON_THROW_ON_ERROR)
             ]);
+
+            $order->customer->notify(new UserState());
+//            \Log::info(json_encode($order->customer, true));
+
 
             //update products inventory
 

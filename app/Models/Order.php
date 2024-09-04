@@ -5,6 +5,7 @@ namespace App\Models;
 use App\States\OrderState;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\ModelStates\HasStates;
 use App\States\OrderStates\{Delivered, Paid, Preparing, Shipping};
 
@@ -21,6 +22,12 @@ class Order extends Model
 //    protected $casts = [
 //        'state' => OrderState::class
 //    ];
+
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
+    }
 
 
 }

@@ -62,4 +62,9 @@ class Customer extends Authenticatable
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function Orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }
