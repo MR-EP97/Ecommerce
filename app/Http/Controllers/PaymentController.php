@@ -29,7 +29,7 @@ class PaymentController extends Controller
             ]);
             // api to transaction
             //$transaction
-//            if ($status === 'success') {
+//            if ($status === 'success')
             $cart->update([
                 'status' => 'success',
             ]);
@@ -40,11 +40,9 @@ class PaymentController extends Controller
 //                'data' => json_decode($invoice, false, 512, JSON_THROW_ON_ERROR)
             ]);
 
-            $order->customer->notify(new UserState());
-//            \Log::info(json_encode($order->customer, true));
+            $order->customer->notify(new UserState($order));
 
-
-            //update products inventory
+            //TODO update products inventory
 
             DB::commit();
             return Response::json(['status' => 'success',
@@ -52,19 +50,17 @@ class PaymentController extends Controller
                 'invoice' => '{}'
 //                'invoice' => $invoice
             ], HttpResponse::HTTP_CREATED);
-//            }
         } catch (\Exception $e) {
 
-            Log::info('failed');
 
             DB::rollBack();
             $cart->update([
                 'status' => 'failed',
             ]);
-            Response::json([
+            return Response::json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
-            ], HttpResponse::HTTP_UNPROCESSABLE_ENTITY);
+            ], HttpResponse::HTTP_BAD_REQUEST);
         }
     }
 
