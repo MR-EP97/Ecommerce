@@ -34,7 +34,7 @@ class ProductController extends Controller
     {
 
         $product = Product::query()->create(
-            $request->only('name', 'seller_id', 'category_id')
+            array_merge($request->safe()->only('name', 'category_id'), ['seller_id' => $request->user()->id])
         );
         if ($request->has('image')) {
             $path = Storage::disk('local')->put('avatar/products', $request->file('image'));

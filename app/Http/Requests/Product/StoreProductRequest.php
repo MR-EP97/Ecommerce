@@ -4,6 +4,7 @@ namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class StoreProductRequest extends FormRequest
 {
     /**
@@ -23,8 +24,8 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'seller_id' => 'required|int|exists:App\Models\Seller,id',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'category_id' => 'required|int|exists:App\Models\Category,id'
         ];
     }
 }

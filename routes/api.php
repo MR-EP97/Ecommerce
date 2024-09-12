@@ -17,11 +17,11 @@ Route::post('/customer/login', [CustomerController::class, 'loginCustomer']);
 Route::post('/seller/register', [SellerController::class, 'registerSeller']);
 Route::post('/seller/login', [SellerController::class, 'loginSeller']);
 
-Route::apiResource('/products', ProductController::class);
+Route::apiResource('/products', ProductController::class)->middleware('auth:seller');
 Route::apiResource('/categories', CategoryController::class);
 Route::apiResource('/features', FeatureController::class);
 
-Route::post('/add-product-to-cart/{product_id}', [CartController::class, 'addProductToCart'])->middleware('auth:api');
-Route::post('/pay', [PaymentController::class, 'pay'])->middleware('auth:api');
-Route::get('/result-pay', [PaymentController::class, 'pay'])->middleware('auth:api');
+Route::post('/add-product-to-cart/{product_id}', [CartController::class, 'addProductToCart'])->middleware('auth:customer');
+Route::post('/pay', [PaymentController::class, 'pay'])->middleware('auth:customer');
+Route::get('/result-pay', [PaymentController::class, 'pay'])->middleware('auth:customer');
 
