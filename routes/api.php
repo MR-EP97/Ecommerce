@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
@@ -9,7 +10,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
 
-
+Route::post('/admin/login',[AdminController::class,'login']);
+//Route::post('/admin/{order_id}/set-status',)
 Route::post('/customer/register', [CustomerController::class, 'registerCustomer']);
 Route::post('/customer/login', [CustomerController::class, 'loginCustomer']);
 
@@ -24,4 +26,5 @@ Route::apiResource('/features', FeatureController::class);
 Route::post('/add-product-to-cart/{product_id}', [CartController::class, 'addProductToCart'])->middleware('auth:customer');
 Route::post('/pay', [PaymentController::class, 'pay'])->middleware('auth:customer');
 Route::get('/result-pay', [PaymentController::class, 'pay'])->middleware('auth:customer');
+
 
