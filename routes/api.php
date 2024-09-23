@@ -10,7 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/admin/login',[AdminController::class,'login']);
+Route::post('/admin/login', AdminController::class);
 //Route::post('/admin/{order_id}/set-status',)
 Route::post('/customer/register', [CustomerController::class, 'registerCustomer']);
 Route::post('/customer/login', [CustomerController::class, 'loginCustomer']);
